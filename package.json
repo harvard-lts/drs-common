@@ -1,5 +1,5 @@
 {
-  "name": "@axiominfo/drs-common",
+  "name": "@harvard-lts/drs-common",
   "version": "1.0.0",
   "description": "Common NestJS package for digital repository system",
   "author": "William Welling <william_welling@harvard.edu>",
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/axiominfo/drs-common.git"
+    "url": "git+https://github.com/harvard-lts/drs-common.git"
   },
   "bugs": {
-    "url": "https://github.com/axiominfo/drs-common/issues"
+    "url": "https://github.com/harvard-lts/drs-common/issues"
   },
-  "homepage": "https://github.com/axiominfo/drs-common#readme",
+  "homepage": "https://github.com/harvard-lts/drs-common#readme",
   "scripts": {
     "start:dev": "tsc -w",
     "build": "tsc",

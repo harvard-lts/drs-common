@@ -30,7 +30,7 @@ npm install
 
 ```
 //npm.pkg.github.com/:_authToken=<PERSONAL ACCESS TOKEN>
-@axiominfo:registry=https://npm.pkg.github.com
+@harvard-lts:registry=https://npm.pkg.github.com
 ```
 
 2. Version appropriately
