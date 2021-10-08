@@ -24,6 +24,22 @@ cd drs-common
 npm install
 ```
 
+## Publish to GitHub
+
+1. Create .npmrc
+
+```
+//npm.pkg.github.com/:_authToken=<PERSONAL ACCESS TOKEN>
+@axiominfo:registry=https://npm.pkg.github.com
+```
+
+2. Version appropriately
+2. Publish package
+
+```
+npm publish
+```
+
 ## Change Log
 
 See [Changelog](CHANGELOG.md) for more information.
