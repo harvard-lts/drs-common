@@ -1,1 +1,1 @@
-export const Greet = (name: string) => `Hello, ${name}!`;
+export * from './test';

@@ -1,13 +1,14 @@
 {
-  "name": "drs-common",
+  "name": "@axiominfo/drs-common",
   "version": "1.0.0",
   "description": "Common NestJS package for digital repository system",
   "author": "William Welling <william_welling@harvard.edu>",
   "keywords": [
     "nestjs"
   ],
+  "readmeFilename": "README.md",
   "license": "Apache-2.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
     "dist/**/*",
     "*.md"
