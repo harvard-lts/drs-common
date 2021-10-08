@@ -52,7 +52,4 @@ const appOptions = (config: AppConfig): NestApplicationOptions => {
   return options;
 };
 
-export {
-  appOptions,
-  AppConfig
-};
+export { appOptions, AppConfig };

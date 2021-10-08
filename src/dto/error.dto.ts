@@ -14,7 +14,21 @@
  * limitations under the License.
  */
 
-export * from './app/app.utility';
-export * from './crypto/crypto.utility';
-export * from './decorator';
-export * from './dto';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class ErrorDto {
+  @ApiProperty({
+    description: 'HTTP status code',
+  })
+  statusCode: number;
+
+  @ApiProperty({
+    description: 'Error message',
+  })
+  message: string;
+
+  @ApiProperty({
+    description: 'HTTP error',
+  })
+  error: string;
+}
