@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export * from './app/app.utility';
-export * from './crypto/crypto.utility';
-export * from './decorator';
+import { SetMetadata } from '@nestjs/common';
+
+export const Scope = (scope: string) => SetMetadata('scope', scope);

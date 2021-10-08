@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-export * from './app/app.utility';
-export * from './crypto/crypto.utility';
-export * from './decorator';
+export { Payload } from './payload.decorator';
+export { Scope } from './scope.decorator';
