@@ -19,8 +19,8 @@ import { existsSync, readFileSync } from 'fs';
 
 interface AppConfig {
   logger: LogLevel[];
-  sslKeyPath: string;
-  sslCertPath: string;
+  sslKeyPath?: string;
+  sslCertPath?: string;
 }
 
 const appOptions = (config: AppConfig): NestApplicationOptions => {
