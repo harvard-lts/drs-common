@@ -26,11 +26,13 @@ npm install
 
 ## Publish to GitHub
 
+***Requires PAT with write:packages scope to publish***
+
 1. Create .npmrc
 
 ```
-//npm.pkg.github.com/:_authToken=<PERSONAL ACCESS TOKEN>
 @harvard-lts:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=<PAT>
 ```
 
 2. Version appropriately
