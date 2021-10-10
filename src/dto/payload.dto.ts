@@ -54,4 +54,4 @@ class DecryptPayloadDto extends ValidatePayloadDto {
   verify: boolean;
 }
 
-export { ValidatePayloadDto, EncryptPayloadDto, DecryptPayloadDto };
+export { DecryptPayloadDto, EncryptPayloadDto, ValidatePayloadDto };

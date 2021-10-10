@@ -18,9 +18,9 @@ export { ErrorDto } from './error.dto';
 export {
   DecryptJobDto,
   EncryptJobDto,
-  JobDto,
   ProcessAction,
   ProcessDto,
+  ValidateJobDto,
 } from './job.dto';
 export {
   DecryptPayloadDto,

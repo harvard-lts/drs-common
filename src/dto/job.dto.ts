@@ -30,7 +30,7 @@ class ProcessDto {
   folder: string;
 }
 
-class JobDto {
+class ValidateJobDto {
   @ApiProperty({
     description: 'Job process',
   })
@@ -47,13 +47,19 @@ class JobDto {
   verified: boolean;
 }
 
-class EncryptJobDto extends JobDto {}
+class EncryptJobDto extends ValidateJobDto {}
 
-class DecryptJobDto extends JobDto {
+class DecryptJobDto extends ValidateJobDto {
   @ApiProperty({
     description: 'Decrypt destination',
   })
   destination?: string;
 }
 
-export { DecryptJobDto, EncryptJobDto, ProcessAction, ProcessDto, JobDto };
+export {
+  DecryptJobDto,
+  EncryptJobDto,
+  ProcessAction,
+  ProcessDto,
+  ValidateJobDto,
+};
