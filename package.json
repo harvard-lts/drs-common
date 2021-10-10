@@ -1,6 +1,6 @@
 {
   "name": "@harvard-lts/drs-common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common NestJS package for digital repository system",
   "author": "William Welling <william_welling@harvard.edu>",
   "keywords": [
