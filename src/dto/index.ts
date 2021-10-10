@@ -15,7 +15,13 @@
  */
 
 export { ErrorDto } from './error.dto';
-export { JobDto } from './job.dto';
+export {
+  DecryptJobDto,
+  EncryptJobDto,
+  JobDto,
+  ProcessAction,
+  ProcessDto,
+} from './job.dto';
 export {
   DecryptPayloadDto,
   EncryptPayloadDto,

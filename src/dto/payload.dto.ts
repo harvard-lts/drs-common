@@ -28,14 +28,11 @@ class ValidatePayloadDto {
   checksum: string;
 
   @ApiProperty({
-    description: 'Filename as subject',
-  })
-  sub: string;
-
-  @ApiProperty({
     description: 'Granted authority scope',
   })
   scope: string;
+
+  sub: string;
 }
 
 class EncryptPayloadDto extends ValidatePayloadDto {
@@ -52,7 +49,7 @@ class DecryptPayloadDto extends ValidatePayloadDto {
   destination: string;
 
   @ApiProperty({
-    description: 'Verify encryption',
+    description: 'Verify decryption',
   })
   verify: boolean;
 }

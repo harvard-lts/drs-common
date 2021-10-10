@@ -37,19 +37,23 @@ class JobDto {
   process: ProcessDto;
 
   @ApiProperty({
-    description: 'Checksums of files encrypted',
+    description: 'Processed file checksums',
   })
   checksums: { [filename: string]: string };
 
   @ApiProperty({
-    description: 'Whether encryption was verified',
+    description: 'Whether process was verified',
   })
   verified: boolean;
+}
 
+class EncryptJobDto extends JobDto {}
+
+class DecryptJobDto extends JobDto {
   @ApiProperty({
     description: 'Decrypt destination',
   })
   destination?: string;
 }
 
-export { ProcessAction, ProcessDto, JobDto };
+export { DecryptJobDto, EncryptJobDto, ProcessAction, ProcessDto, JobDto };
