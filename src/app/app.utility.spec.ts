@@ -106,7 +106,6 @@ OFnLTNK8Fw0YszsGb7Og9dUxDZc7BRK6Leav
 
 describe('AppUtility', () => {
   describe('appOptions', () => {
-
     beforeAll(async () => {
       mkdirSync('test');
     });
@@ -117,7 +116,7 @@ describe('AppUtility', () => {
 
     it('should create appOptions without httpsOptions', async () => {
       const options = appOptions({
-        logger: ['log', 'warn', 'debug']
+        logger: ['log', 'warn', 'debug'],
       });
 
       expect(options).toBeDefined();
@@ -126,16 +125,8 @@ describe('AppUtility', () => {
     });
 
     it('should create appOptions with httpsOptions', async () => {
-      writeFileSync(
-        'test/server.key',
-        key,
-        'utf8'
-      );
-      writeFileSync(
-        'test/server.crt', 
-        cert,
-        'utf8'
-      );
+      writeFileSync('test/server.key', key, 'utf8');
+      writeFileSync('test/server.crt', cert, 'utf8');
 
       const options = appOptions({
         logger: ['log', 'warn', 'debug'],
