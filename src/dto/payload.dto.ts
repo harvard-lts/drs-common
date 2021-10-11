@@ -15,7 +15,7 @@
  */
 
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsDefined, IsIn, IsNotEmpty, IsOptional, ValidateIf } from 'class-validator';
 import { ProcessAction } from './job.dto';
 
 class ValidatePayloadDto {
@@ -28,13 +28,14 @@ class ValidatePayloadDto {
   @ApiProperty({
     description: 'File checksum',
   })
-  @IsOptional()
+  @ValidateIf(o => o.verify)
+  @IsNotEmpty({ message: 'checksum must not be empty when verify true' })
   checksum: string;
 
   @ApiProperty({
     description: 'Granted authority scope',
   })
-  @IsDefined()
+  @IsIn(['encrypt', 'decrypt', 'validate'])
   scope: ProcessAction;
 
   sub: string;
