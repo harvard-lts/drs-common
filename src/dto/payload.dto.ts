@@ -15,22 +15,27 @@
  */
 
 import { ApiProperty } from '@nestjs/swagger';
+import { IsDefined, IsNotEmpty, IsOptional } from 'class-validator';
+import { ProcessAction } from './job.dto';
 
 class ValidatePayloadDto {
   @ApiProperty({
     description: 'Secure source folder',
   })
+  @IsDefined()
   folder: string;
 
   @ApiProperty({
     description: 'File checksum',
   })
+  @IsOptional()
   checksum: string;
 
   @ApiProperty({
     description: 'Granted authority scope',
   })
-  scope: string;
+  @IsDefined()
+  scope: ProcessAction;
 
   sub: string;
 }
@@ -39,6 +44,7 @@ class EncryptPayloadDto extends ValidatePayloadDto {
   @ApiProperty({
     description: 'Verify encryption',
   })
+  @IsOptional()
   verify: boolean;
 }
 
@@ -46,11 +52,13 @@ class DecryptPayloadDto extends ValidatePayloadDto {
   @ApiProperty({
     description: 'Decrypted destination',
   })
+  @IsNotEmpty()
   destination: string;
 
   @ApiProperty({
     description: 'Verify decryption',
   })
+  @IsOptional()
   verify: boolean;
 }
 
