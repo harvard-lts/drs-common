@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { Logger, LogLevel, NestApplicationOptions } from '@nestjs/common';
+import { Logger, LoggerService, LogLevel, NestApplicationOptions } from '@nestjs/common';
 import { existsSync, readFileSync } from 'fs';
 
 interface AppConfig {
-  logger: LogLevel[];
+  logger: LoggerService | LogLevel[] | false;
   sslKeyPath?: string;
   sslCertPath?: string;
 }
