@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-import { Logger, LoggerService, LogLevel, NestApplicationOptions } from '@nestjs/common';
+import {
+  Logger,
+  LoggerService,
+  LogLevel,
+  NestApplicationOptions,
+} from '@nestjs/common';
 import { existsSync, readFileSync } from 'fs';
 
 interface AppConfig {
