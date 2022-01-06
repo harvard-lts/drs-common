@@ -16,7 +16,13 @@
 
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ErrorDto {
+interface Error {
+  statusCode: number;
+  message: string;
+  error: string;
+}
+
+class ErrorDto implements Error {
   @ApiProperty({
     description: 'HTTP status code',
   })
@@ -32,3 +38,5 @@ export class ErrorDto {
   })
   error: string;
 }
+
+export { Error, ErrorDto };

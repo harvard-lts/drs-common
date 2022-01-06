@@ -15,10 +15,28 @@
  */
 
 import { ApiProperty } from '@nestjs/swagger';
+import { ProcessAction } from '../crypto';
 
-type ProcessAction = 'encrypt' | 'decrypt' | 'validate';
+type Checksums = { [filename: string]: string };
 
-class ProcessDto {
+interface Process {
+  action: ProcessAction;
+  folder: string;
+}
+
+interface ValidateJob {
+  process: Process;
+  checksums: Checksums;
+  verified: boolean;
+}
+
+type EncryptJob = ValidateJob;
+
+interface DecryptJob extends ValidateJob {
+  destination: string;
+}
+
+class ProcessDto implements Process {
   @ApiProperty({
     description: 'Process action',
   })
@@ -30,7 +48,7 @@ class ProcessDto {
   folder: string;
 }
 
-class ValidateJobDto {
+class ValidateJobDto implements ValidateJob {
   @ApiProperty({
     description: 'Job process',
   })
@@ -39,7 +57,7 @@ class ValidateJobDto {
   @ApiProperty({
     description: 'Processed file checksums',
   })
-  checksums: { [filename: string]: string };
+  checksums: Checksums;
 
   @ApiProperty({
     description: 'Whether process was verified',
@@ -47,19 +65,23 @@ class ValidateJobDto {
   verified: boolean;
 }
 
-class EncryptJobDto extends ValidateJobDto {}
+class EncryptJobDto extends ValidateJobDto implements EncryptJob {}
 
-class DecryptJobDto extends ValidateJobDto {
+class DecryptJobDto extends ValidateJobDto implements DecryptJob {
   @ApiProperty({
     description: 'Decrypt destination',
   })
-  destination?: string;
+  destination: string;
 }
 
 export {
+  Checksums,
+  DecryptJob,
   DecryptJobDto,
+  EncryptJob,
   EncryptJobDto,
-  ProcessAction,
+  Process,
   ProcessDto,
+  ValidateJob,
   ValidateJobDto,
 };

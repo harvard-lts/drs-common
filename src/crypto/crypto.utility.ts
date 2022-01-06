@@ -18,17 +18,26 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as openpgp from 'openpgp';
 
-enum ChecksumAlgorithm {
-  md5 = 'md5',
-  sha1 = 'sha1',
-  sha256 = 'sha256',
-  sha512 = 'sha512',
-}
+const ALL_CHECKSUM_ALGORITHMS = ['md5', 'sha1', 'sha256', 'sha512'] as const;
+type ChecksumAlgorithmTuple = typeof ALL_CHECKSUM_ALGORITHMS;
+type ChecksumAlgorithm = ChecksumAlgorithmTuple[number];
+const isChecksumAlgorithm = (value: string): value is ChecksumAlgorithm => {
+  return ALL_CHECKSUM_ALGORITHMS.includes(value as ChecksumAlgorithm);
+};
 
-enum EncryptionType {
-  rsa = 'rsa',
-  ecc = 'ecc',
-}
+const ALL_ENCRYPTION_TYPES = ['rsa', 'ecc'] as const;
+type EncryptionTypeTuple = typeof ALL_ENCRYPTION_TYPES;
+type EncryptionType = EncryptionTypeTuple[number];
+const isEncryptionType = (value: string): value is EncryptionType => {
+  return ALL_ENCRYPTION_TYPES.includes(value as EncryptionType);
+};
+
+const ALL_PROCESS_ACTIONS = ['encrypt', 'decrypt', 'validate'] as const;
+type ProcessActionTuple = typeof ALL_PROCESS_ACTIONS;
+type ProcessAction = ProcessActionTuple[number];
+const isProcessAction = (value: string): value is ProcessAction => {
+  return ALL_PROCESS_ACTIONS.includes(value as ProcessAction);
+};
 
 interface EncryptOptions {
   origin: string;
@@ -49,7 +58,7 @@ interface DecryptOptions {
 
 const checksum = async (
   path: string,
-  algorithm: ChecksumAlgorithm = ChecksumAlgorithm.md5,
+  algorithm: ChecksumAlgorithm = 'md5',
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     const input = fs.createReadStream(path);
@@ -70,9 +79,13 @@ const checksum = async (
 
 const normalize = (
   checksum: string,
-  algorithm: ChecksumAlgorithm = ChecksumAlgorithm.md5,
+  algorithm: ChecksumAlgorithm = 'md5',
 ): string => {
   return `${algorithm}:${checksum}`;
+};
+
+const algorithm = (checksum: string): string => {
+  return checksum.split(':')[0];
 };
 
 const generate = async (
@@ -156,13 +169,21 @@ const decrypt = async (options: DecryptOptions): Promise<string> => {
 };
 
 export {
+  ALL_CHECKSUM_ALGORITHMS,
+  ALL_ENCRYPTION_TYPES,
+  ALL_PROCESS_ACTIONS,
+  isChecksumAlgorithm,
+  isEncryptionType,
+  isProcessAction,
+  algorithm,
   checksum,
-  encrypt,
   decrypt,
+  encrypt,
   generate,
   ChecksumAlgorithm,
+  DecryptOptions,
   EncryptionType,
   EncryptOptions,
-  DecryptOptions,
   PrivateArmoredKey,
+  ProcessAction,
 };
