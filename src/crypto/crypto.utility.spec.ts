@@ -22,8 +22,8 @@ import {
   writeFileSync,
 } from 'fs';
 import {
+  algorithm,
   checksum,
-  ChecksumAlgorithm,
   decrypt,
   encrypt,
   generate,
@@ -47,13 +47,13 @@ describe('CryptoUtility', () => {
 
     it('should perform sha1 checksum on file', async () => {
       writeFileSync('test/test.txt', 'Hello, World!', 'utf-8');
-      const sha1 = await checksum('test/test.txt', ChecksumAlgorithm.sha1);
+      const sha1 = await checksum('test/test.txt', 'sha1');
       expect(sha1).toEqual('sha1:0a0a9f2a6772942557ab5355d76af442f8f65e01');
     });
 
     it('should perform sha256 checksum on file', async () => {
       writeFileSync('test/test.txt', 'Hello, World!', 'utf-8');
-      const sha256 = await checksum('test/test.txt', ChecksumAlgorithm.sha256);
+      const sha256 = await checksum('test/test.txt', 'sha256');
       expect(sha256).toEqual(
         'sha256:dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f',
       );
@@ -61,10 +61,36 @@ describe('CryptoUtility', () => {
 
     it('should perform sha512 checksum on file', async () => {
       writeFileSync('test/test.txt', 'Hello, World!', 'utf-8');
-      const sha512 = await checksum('test/test.txt', ChecksumAlgorithm.sha512);
+      const sha512 = await checksum('test/test.txt', 'sha512');
       expect(sha512).toEqual(
         'sha512:374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e0fa2fe0006a52570ef18c19def4e617c33ce52ef0a6e5fbe318cb0387',
       );
+    });
+  });
+
+  describe('algorithm', () => {
+    it('should return md5 checksum algorithm', async () => {
+      const md5 = algorithm('md5:65a8e27d8879283831b664bd8b7f0ad4');
+      expect(md5).toEqual('md5');
+    });
+
+    it('should return sha1 checksum algorithm', async () => {
+      const sha1 = algorithm('sha1:0a0a9f2a6772942557ab5355d76af442f8f65e01');
+      expect(sha1).toEqual('sha1');
+    });
+
+    it('should return sha256 checksum algorithm', async () => {
+      const sha256 = algorithm(
+        'sha256:dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f',
+      );
+      expect(sha256).toEqual('sha256');
+    });
+
+    it('should return sha512 checksum algorithm', async () => {
+      const sha512 = algorithm(
+        'sha512:374d794a95cdcfd8b35993185fef9ba368f160d8daf432d08ba9f1ed1e5abe6cc69291e0fa2fe0006a52570ef18c19def4e617c33ce52ef0a6e5fbe318cb0387',
+      );
+      expect(sha512).toEqual('sha512');
     });
   });
 

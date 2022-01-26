@@ -22,9 +22,31 @@ import {
   IsOptional,
   ValidateIf,
 } from 'class-validator';
-import { ProcessAction } from './job.dto';
+import {
+  ALL_CHECKSUM_ALGORITHMS,
+  ALL_PROCESS_ACTIONS,
+  ChecksumAlgorithm,
+  ProcessAction,
+} from '../crypto';
 
-class ValidatePayloadDto {
+interface ValidatePayload {
+  folder: string;
+  checksum?: string;
+  checksumAlgorithm?: ChecksumAlgorithm;
+  scope?: ProcessAction;
+  sub?: string;
+}
+
+interface EncryptPayload extends ValidatePayload {
+  verify?: boolean;
+}
+
+interface DecryptPayload extends ValidatePayload {
+  destination: string;
+  verify?: boolean;
+}
+
+class ValidatePayloadDto implements ValidatePayload {
   @ApiProperty({
     description: 'Secure source folder',
   })
@@ -39,15 +61,22 @@ class ValidatePayloadDto {
   checksum: string;
 
   @ApiProperty({
+    description: 'File checksum algorithm',
+  })
+  @IsIn(ALL_CHECKSUM_ALGORITHMS)
+  @IsOptional()
+  checksumAlgorithm: ChecksumAlgorithm;
+
+  @ApiProperty({
     description: 'Granted authority scope',
   })
-  @IsIn(['encrypt', 'decrypt', 'validate'])
+  @IsIn(ALL_PROCESS_ACTIONS)
   scope: ProcessAction;
 
   sub: string;
 }
 
-class EncryptPayloadDto extends ValidatePayloadDto {
+class EncryptPayloadDto extends ValidatePayloadDto implements EncryptPayload {
   @ApiProperty({
     description: 'Verify encryption',
   })
@@ -55,7 +84,7 @@ class EncryptPayloadDto extends ValidatePayloadDto {
   verify: boolean;
 }
 
-class DecryptPayloadDto extends ValidatePayloadDto {
+class DecryptPayloadDto extends ValidatePayloadDto implements DecryptPayload {
   @ApiProperty({
     description: 'Decrypted destination',
   })
@@ -69,4 +98,11 @@ class DecryptPayloadDto extends ValidatePayloadDto {
   verify: boolean;
 }
 
-export { DecryptPayloadDto, EncryptPayloadDto, ValidatePayloadDto };
+export {
+  DecryptPayload,
+  DecryptPayloadDto,
+  EncryptPayload,
+  EncryptPayloadDto,
+  ValidatePayload,
+  ValidatePayloadDto,
+};
