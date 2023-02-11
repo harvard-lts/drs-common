@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmdirSync,
-  writeFileSync,
-} from 'fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'fs';
 import {
   algorithm,
   checksum,
@@ -35,7 +29,7 @@ describe('CryptoUtility', () => {
   });
 
   afterEach(async () => {
-    rmdirSync('test', { recursive: true });
+    rmSync('test', { recursive: true });
   });
 
   describe('checksum', () => {
@@ -163,8 +157,8 @@ describe('CryptoUtility', () => {
 
       expect(existsSync('test/decrypted.txt')).toBeTruthy();
 
-      expect(readFileSync('test/decrypted.txt').toString()).toEqual(
-        readFileSync('test/test.txt').toString(),
+      expect(await checksum('test/decrypted.txt', 'sha512')).toEqual(
+        await checksum('test/test.txt', 'sha512'),
       );
     });
   });
