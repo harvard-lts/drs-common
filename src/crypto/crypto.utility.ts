@@ -145,6 +145,7 @@ const decrypt = async (options: DecryptOptions): Promise<string> => {
     const decryptionKeys = await Promise.all(keyPromises);
 
     const decrypted = await openpgp.decrypt({
+      config: { allowUnauthenticatedStream: true },
       message: await openpgp.readMessage({
         binaryMessage: fs.createReadStream(options.origin),
       }),

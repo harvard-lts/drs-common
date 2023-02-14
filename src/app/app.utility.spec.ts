@@ -15,7 +15,7 @@
  */
 
 import { appOptions } from './app.utility';
-import { mkdirSync, rmdirSync, writeFileSync } from 'fs';
+import { mkdirSync, rmSync, writeFileSync } from 'fs';
 
 const key = `-----BEGIN PRIVATE KEY-----
 MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQDzNhEfMSStmFXk
@@ -111,7 +111,7 @@ describe('AppUtility', () => {
     });
 
     afterAll(async () => {
-      rmdirSync('test', { recursive: true });
+      rmSync('test', { recursive: true });
     });
 
     it('should create appOptions without httpsOptions', async () => {
